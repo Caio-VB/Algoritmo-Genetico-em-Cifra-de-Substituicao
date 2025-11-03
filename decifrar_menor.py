@@ -86,6 +86,12 @@ def crossover_pmx(p1, p2):
 
     return filho
 
+def mutacao_swap(individuo, taxa_mutacao=0.35):
+    if len(individuo) >= 2 and random.random() < taxa_mutacao:
+        a, b = random.sample(range(len(individuo)), 2)
+        individuo[a], individuo[b] = individuo[b], individuo[a]
+    return individuo
+
 def roleta(pesos, total):
     r, acum = random.uniform(0, total), 0
     for idx, peso in enumerate(pesos):
@@ -95,7 +101,7 @@ def roleta(pesos, total):
     return len(pesos) - 1
 
 geracao = 0
-while geracao < 20000:
+while geracao < 22000:
     decifradas = []
     
     for i, individuo in enumerate(populacao):
@@ -158,7 +164,6 @@ while geracao < 20000:
                 while j == i and len(populacao) > 1:
                     j = random.randrange(len(populacao))
 
-
         pai1 = populacao[i]
         pai2 = populacao[j]
         meio = len(pai1) // 2
@@ -167,12 +172,8 @@ while geracao < 20000:
         filho2 = crossover_ox(pai2, pai1)
         
         taxa_mutacao = 0.35
-        if len(filho1) >= 2 and random.random() < taxa_mutacao:
-            a, b = random.sample(range(len(filho1)), 2)
-            filho1[a], filho1[b] = filho1[b], filho1[a] 
-        if len(filho2) >= 2 and random.random() < taxa_mutacao:
-            a, b = random.sample(range(len(filho2)), 2)
-            filho2[a], filho2[b] = filho2[b], filho2[a]
+        filho1 = mutacao_swap(filho1, taxa_mutacao)
+        filho2 = mutacao_swap(filho2, taxa_mutacao)
 
         nova_populacao.append(filho1)
         nova_populacao.append(filho2)
