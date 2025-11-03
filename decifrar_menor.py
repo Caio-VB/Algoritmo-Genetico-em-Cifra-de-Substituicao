@@ -54,7 +54,7 @@ def busca_letra(individuo, posicao):
         return " "
     return individuo[posicao]
 
-def crossover(p1, p2):
+def crossover_ox(p1, p2):
     n = len(p1)
     a, b = sorted(random.sample(range(n), 2))
     filho = [None] * n
@@ -163,10 +163,10 @@ while geracao < 20000:
         pai2 = populacao[j]
         meio = len(pai1) // 2
 
-        filho1 = crossover(pai1, pai2)
-        filho2 = crossover(pai2, pai1)
+        filho1 = crossover_ox(pai1, pai2)
+        filho2 = crossover_ox(pai2, pai1)
         
-        taxa_mutacao = 0.25
+        taxa_mutacao = 0.35
         if len(filho1) >= 2 and random.random() < taxa_mutacao:
             a, b = random.sample(range(len(filho1)), 2)
             filho1[a], filho1[b] = filho1[b], filho1[a] 
