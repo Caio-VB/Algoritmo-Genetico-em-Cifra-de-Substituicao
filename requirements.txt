@@ -1,0 +1,2 @@
+- Python 3.8 ou superior
+- Nenhuma biblioteca externa (só biblioteca padrão)
